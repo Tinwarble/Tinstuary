@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<include name="View_53_Shift">
+		<control type="group">
+			<description>Poster Viewtype</description>
+			<centertop>48%</centertop>
+			<left>0</left>
+			<height>880</height>
+			<control type="group">
+				<visible>Control.IsVisible(53)</visible>
+				<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+				<animation effect="fade" time="200">VisibleChange</animation>
+				<!--Top Bar-->
+				<control type="image">
+					<left>0</left>
+					<top>35</top>
+					<width>100%</width>
+					<height>305</height>
+					<texture colordiffuse="E6FFFFFF">dialogs/dialog-bg-nobo.png</texture>
+				</control>
+				<!--Top Bar Separator-->
+				<control type="image">
+					<left>50%</left>
+					<top>57</top>
+					<width>2</width>
+					<height>260</height>
+					<texture colordiffuse="E64a4a4a" rotate="90">dialogs/separator-grey.png</texture>
+					<visible>!String.IsEmpty(ListItem.Plot) | !String.IsEmpty(ListItem.Property(Album_Description)) | !String.IsEmpty(ListItem.Property(Artist_Description))</visible>					
+				</control>
+				<!--Watched Icon-->
+				<control type="image">
+					<left>24</left>
+					<top>295</top>
+					<width>42</width>
+					<height>42</height>
+					<texture>$VAR[WallWatchedIconVar]</texture>
+				</control>
+				<control type="progress">
+					<left>70</left>
+					<top>286</top>
+					<width>45%</width>
+					<height>10</height>					
+					<texturebg></texturebg>
+					<midtexture colordiffuse="button_focus" border="1">progress/texturebg_alt_white.png</midtexture>
+					<info>ListItem.PercentPlayed</info>
+					<visible>!Integer.IsEqual(ListItem.PercentPlayed,0)</visible>
+				</control>
+			</control>
+			<control type="group">
+				<visible>Control.IsVisible(53)</visible>
+				<include>Visible_Right</include>
+				<include>OpenClose_Right</include>
+				<top>280</top>
+				<control type="image">
+					<left>600</left>
+					<top>600</top>
+					<width>340</width>
+					<height>110</height>
+					<visible>Control.HasFocus(53)</visible>
+					<animation effect="slide" start="0,0" end="-364,0" time="300" tween="sine" easing="inout" condition="Integer.IsEqual(Container.Position,1) | Integer.IsEqual(Container.Position,0)">Conditional</animation>
+					<animation effect="slide" start="0,0" end="-364,0" time="300" tween="sine" easing="inout" condition="Integer.IsEqual(Container.Position,0)">Conditional</animation>
+					<animation effect="slide" start="0,0" end="364,0" time="300" tween="sine" easing="inout" condition="Integer.IsEqual(Container.Position,3) | Integer.IsEqual(Container.Position,4)">Conditional</animation>
+					<animation effect="slide" start="0,0" end="364,0" time="300" tween="sine" easing="inout" condition="Integer.IsEqual(Container.Position,4)">Conditional</animation>
+				</control>
+				<control type="fixedlist" id="53">
+					<left>-150</left>
+					<top>0</top>
+					<width>111%</width>
+					<height>695</height>
+					<focusposition>1</focusposition>
+					<movement>0</movement>
+					<pagecontrol>5199</pagecontrol>
+					<scrolltime tween="cubic" easing="out">500</scrolltime>
+					<orientation>horizontal</orientation>
+					<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(musicvideos) | Container.Content(artists) | Container.Content(albums) | Container.Content(mixed) | Container.Content(images) | Container.Content(videos)</visible>
+					<onleft>53</onleft>
+					<onup>9000</onup>
+					<ondown>5199</ondown>
+					<onright>53</onright>
+					<preloaditems>1</preloaditems>
+					<viewtype label="31100">icon</viewtype>
+					<itemlayout width="370">
+						<!--Videos Poster Unfocused-->
+						<control type="image">
+							<depth>DepthContentPopout</depth>
+							<left>0</left>
+							<top>110</top>
+							<width>321</width>
+							<height>480</height>
+							<aspectratio aligny="center">scale</aspectratio>
+							<texture fallback="DefaultVideo.png">$VAR[PosterVar]</texture>
+							<bordertexture border="21">overlays/shadow.png</bordertexture>
+							<bordersize>20</bordersize>
+							<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(videos)</visible>
+						</control>
+						<!--Music Poster Unfocused-->
+						<control type="image">
+							<depth>DepthContentPopout</depth>
+							<left>0</left>
+							<top>150</top>
+							<width>370</width>
+							<height>370</height>
+							<aspectratio aligny="center">scale</aspectratio>
+							<texture fallback="DefaultVideo.png">$VAR[ShiftThumbVar]</texture>
+							<bordertexture border="21">overlays/shadow.png</bordertexture>
+							<bordersize>20</bordersize>
+							<visible>Container.Content(musicvideos) | Container.Content(artists) | Container.Content(albums) | Container.Content(images)</visible>
+						</control>
+					</itemlayout>
+					<focusedlayout width="370">
+						<control type="group">
+							<animation effect="zoom" reversible="true" start="80" end="100" center="185,347" delay="50" time="200">Focus</animation>
+							<animation effect="zoom" reversible="true" start="100" end="82" center="185,347" delay="50" time="200">UnFocus</animation>
+							<!--Videos Poster Focused-->
+							<control type="image">
+								<depth>DepthContentPopout</depth>
+								<left>-31</left>
+								<top>58</top>
+								<width>391</width>
+								<height>585</height>
+								<aspectratio aligny="center">scale</aspectratio>
+								<texture fallback="DefaultVideo.png">$VAR[PosterVar]</texture>
+								<bordertexture border="21">overlays/shadow.png</bordertexture>
+								<bordersize>20</bordersize>
+								<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(videos)</visible>
+							</control>
+							<!--Music Poster Focused-->
+							<control type="image">
+								<depth>DepthContentPopout</depth>
+								<left>-30</left>
+								<top>120</top>
+								<width>430</width>
+								<height>430</height>
+								<aspectratio aligny="center">scale</aspectratio>
+								<texture fallback="DefaultVideo.png">$VAR[ShiftThumbVar]</texture>
+								<bordertexture border="21">overlays/shadow.png</bordertexture>
+								<bordersize>20</bordersize>
+								<visible>Container.Content(musicvideos) | Container.Content(artists) | Container.Content(albums) | Container.Content(images)</visible>
+							</control>
+							<!--Videos Select Overlay-->
+							<control type="image">
+								<left>-15</left>
+								<top>78</top>
+								<width>356</width>
+								<height>546</height>
+								<visible>Control.HasFocus(53)</visible>							
+								<texture border="8" colordiffuse="button_focus">buttons/thumbnail_focused.png</texture>
+								<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(videos)</visible>
+							</control>
+							<!--Music Select Overlay-->
+							<control type="image">
+								<left>-14</left>
+								<top>137</top>
+								<width>396</width>
+								<height>396</height>
+								<visible>Control.HasFocus(53)</visible>							
+								<texture border="8" colordiffuse="button_focus">buttons/thumbnail_focused.png</texture>
+								<visible>Container.Content(musicvideos) | Container.Content(artists) | Container.Content(albums) | Container.Content(images)</visible>
+							</control>
+						</control>
+					</focusedlayout>
+				</control>
+			</control>
+			<control type="group">
+				<!--Left & Right Metadata-->
+				<visible>Control.IsVisible(53)</visible>
+				<include>Visible_Right</include>
+				<include>OpenClose_Right</include>
+				<!--Title-->
+				<control type="textbox">
+					<left>30</left>
+					<top>22</top>
+					<width>50%</width>
+					<height>90</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Label,[COLOR button_focus],[/COLOR]]</label>
+					<font>font45_title</font>					
+				</control>
+				<!--Left Side Metadata-->
+				<control type="group">
+					<top>50</top>
+					<width>50%</width>
+					<include content="ShiftTextbox">
+						<param name="textbox_id" value="53200" />
+						<param name="textbox_content" value="$VAR[ShiftLeftTextBoxVar]" />
+					</include>
+				</control>
+				<!--Right Side Plot-->
+				<control type="group">
+					<left>50%</left>
+					<width>50%</width>					
+					<include content="ShiftTextbox2">
+						<param name="textbox_id" value="53300" />
+						<param name="textbox_content" value="$VAR[ShiftRightTextBoxVar]" />
+					</include>					
+				</control>
+				<!--Collections Text-->
+				<control type="panel">
+					<left>20</left>
+					<top>88</top>
+					<width>1880</width>
+					<height>215</height>
+					<orientation>horizontal</orientation>
+					<visible>ListItem.IsCollection</visible>
+					<animation effect="fade" time="200">VisibleChange</animation>
+					<focusedlayout height="40" width="900">
+						<control type="label">
+							<textoffsetx>10</textoffsetx>
+							<height>40</height>
+							<width>900</width>
+							<aligny>center</aligny>
+							<label>$INFO[ListItem.Year,[COLOR button_focus],[/COLOR]  -  ]$INFO[ListItem.Title]</label>
+							<shadowcolor>text_shadow</shadowcolor>
+						</control>
+					</focusedlayout>
+					<itemlayout height="40" width="900">
+						<control type="label">
+							<textoffsetx>10</textoffsetx>
+							<height>40</height>
+							<width>900</width>
+							<aligny>center</aligny>
+							<label>$INFO[ListItem.Year,[COLOR button_focus],[/COLOR]  -  ]$INFO[ListItem.Title]</label>
+							<shadowcolor>text_shadow</shadowcolor>
+						</control>
+					</itemlayout>
+					<content sortby="year" sortorder="descending">$VAR[InfoListPathVar]</content>
+				</control>
+			</control>
+		</control>
+	</include>
+	<include name="ShiftTextbox">
+		<!--Left Side Metadata Control-->
+		<control type="group">
+			<animation effect="fade" time="200" start="0" end="100" condition="!String.IsEmpty(Control.GetLabel($PARAM[textbox_id]))">Conditional</animation>
+			<animation effect="fade" time="200" start="100" end="0" condition="String.IsEmpty(Control.GetLabel($PARAM[textbox_id]))">Conditional</animation>
+			<control type="textbox" id="$PARAM[textbox_id]">
+				<left>30</left>
+				<top>45</top>
+				<right>30</right>
+				<height>215</height>
+				<label>$PARAM[textbox_content]</label>
+				<shadowcolor>text_shadow</shadowcolor>
+			</control>
+		</control>
+	</include>
+	<include name="ShiftTextbox2">
+		<!--Right Side Plot Control-->		
+		<control type="group">
+			<animation effect="fade" time="200" start="0" end="100" condition="!String.IsEmpty(Control.GetLabel($PARAM[textbox_id]))">Conditional</animation>
+			<animation effect="fade" time="200" start="100" end="0" condition="String.IsEmpty(Control.GetLabel($PARAM[textbox_id]))">Conditional</animation>
+			<control type="textbox" id="$PARAM[textbox_id]">
+				<left>30</left>
+				<top>45</top>
+				<right>30</right>
+				<height>287</height>
+				<align>justify</align>
+				<label>$PARAM[textbox_content]</label>
+				<shadowcolor>text_shadow</shadowcolor>
+			</control>
+		</control>
+	</include>
+</includes>
